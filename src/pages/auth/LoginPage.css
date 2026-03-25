@@ -1,0 +1,584 @@
+/* ============================================
+   EnviroSync Login Page – LoginPage.css
+   Updated: Custom error toast + keep-me-logged-in
+   ============================================ */
+
+.login-page {
+  --color-primary: #0d9488;
+  --color-primary-hover: #0f766e;
+  --color-primary-active: #115e59;
+  --color-bg: #ffffff;
+  --color-surface: #f1f5f9;
+  --color-border: #e2e8f0;
+  --color-border-focus: #0d9488;
+  --color-text: #333;
+  --color-text-label: #94a3b8;
+  --color-text-placeholder: #cbd5e1;
+  --color-text-secondary: #64748b;
+  --color-brand-bg: #0f766e;
+  --color-brand-overlay: rgba(0, 0, 0, 0.65);
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.login-page .panel {
+  flex: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ── Left Panel ─────────────────────────────────────────────── */
+.login-page .panel-brand {
+  background: var(--color-brand-bg);
+  position: relative;
+  padding: var(--space-8);
+}
+
+.login-page .brand-content {
+  position: relative;
+  z-index: 2;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+}
+
+.login-page .logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.login-page .logo-circle {
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #0d9488;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.login-page .logo-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+  mix-blend-mode: lighten;
+}
+
+.login-page .logo-text {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.login-page .brand-heading {
+  font-size: 40px;
+  font-weight: 700;
+  color: #ffffff !important;
+  margin: 16px 0 12px;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.login-page .tagline {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.65) !important;
+  line-height: 1.6;
+  font-weight: 400;
+  text-align: center;
+}
+
+.login-page .panel-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.login-page .panel-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.login-page .image-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--color-brand-overlay);
+}
+
+/* ── Right Panel ─────────────────────────────────────────────── */
+.login-page .panel-form {
+  background: var(--color-bg);
+  padding: var(--space-8);
+}
+
+.login-page .form-wrapper {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Top logo */
+.envirosync-logo-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: var(--space-8);
+}
+
+.envirosync-logo-text {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.envirosync-logo-enviro,
+.envirosync-logo-ync { color: #379c8a; }
+
+.envirosync-logo-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #379c8a;
+  flex-shrink: 0;
+}
+
+.envirosync-logo-img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  mix-blend-mode: lighten;
+  filter: brightness(1.2);
+}
+
+.login-page .form-header {
+  margin-bottom: var(--space-6);
+  text-align: center;
+}
+
+.login-page .form-title {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.025em;
+  margin-bottom: var(--space-2);
+}
+
+.login-page .form-subtitle {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  font-weight: 400;
+}
+
+/* ── Custom Error Toast ────────────────────────────────────────
+   Replaces the browser alert() popup with a clean inline toast.
+   Features: icon, title, detail text, dismiss button, progress bar.
+   ──────────────────────────────────────────────────────────── */
+.login-error-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 14px 14px 14px;
+  margin-bottom: 20px;
+  background: #fff5f5;
+  border: 1px solid #fecaca;
+  border-left: 4px solid #ef4444;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  animation: toastSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Red icon wrapper */
+.login-error-toast-icon-wrap {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: #fee2e2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.login-error-toast-icon {
+  color: #dc2626;
+  flex-shrink: 0;
+}
+
+/* Text body */
+.login-error-toast-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.login-error-toast-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #991b1b;
+  margin: 0 0 3px;
+  letter-spacing: -0.01em;
+}
+
+.login-error-toast-detail {
+  font-size: 12px;
+  color: #b91c1c;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Dismiss button */
+.login-error-toast-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fca5a5;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  flex-shrink: 0;
+  transition: color 0.15s, background 0.15s;
+  margin-top: 1px;
+}
+
+.login-error-toast-close:hover {
+  color: #dc2626;
+  background: #fee2e2;
+}
+
+/* Progress bar — animates from 100% → 0% over 6s */
+.login-error-toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ef4444, #fca5a5);
+  border-radius: 0 0 0 6px;
+  animation: toastProgress 6s linear forwards;
+  width: 100%;
+}
+
+@keyframes toastProgress {
+  from { width: 100%; }
+  to   { width: 0%; }
+}
+
+/* ── Form Fields ─────────────────────────────────────────────── */
+.login-page .login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.login-page .field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.login-page .field label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-label);
+}
+
+.login-page .field input {
+  width: 100%;
+  height: 48px;
+  padding: 0 var(--space-4);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-page .field input::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.login-page .field input:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+}
+
+/* Password wrapper */
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrapper input {
+  flex-grow: 1;
+  padding-right: 3rem;
+}
+
+.toggle-password-visibility {
+  position: absolute;
+  right: var(--space-4);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-label);
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.toggle-password-visibility:hover {
+  color: var(--color-text-secondary);
+}
+
+/* ── Form Options (Remember + Forgot) ─────────────────────────── */
+.login-page .form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+}
+
+.login-page .checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  user-select: none;
+  font-size: 13px;
+}
+
+.login-page .checkbox-label input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.login-page .checkmark {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  flex-shrink: 0;
+  transition: border-color 0.2s, background 0.2s;
+  display: inline-block;
+  position: relative;
+}
+
+.login-page .checkbox-label input:checked + .checkmark {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.login-page .checkbox-label input:checked + .checkmark::after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 9px;
+  margin: 2px 0 0 5px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* ── Hover state on checkbox label for better UX ── */
+.login-page .checkbox-label:hover .checkmark {
+  border-color: var(--color-primary);
+}
+
+.login-page .link-forgot {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.login-page .link-forgot:hover {
+  text-decoration: underline;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.login-page .btn-primary {
+  width: 100%;
+  height: 48px;
+  margin-top: var(--space-6);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: #fff;
+  background: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.05s ease, opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-page .btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.login-page .btn-primary:active:not(:disabled) {
+  background: var(--color-primary-active);
+  transform: scale(0.99);
+}
+
+.login-page .btn-primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.35);
+}
+
+/* Loading state */
+.login-page .btn-primary.btn-loading {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+/* Spinner inside button */
+.btn-spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.login-page .btn-secondary {
+  width: 100%;
+  height: 48px;
+  margin-top: var(--space-4);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-primary);
+  background: var(--color-bg);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.05s;
+}
+
+.login-page .btn-secondary:hover {
+  background: var(--color-surface);
+  border-color: var(--color-primary-hover);
+  color: var(--color-primary-hover);
+}
+
+.login-page .btn-secondary:active { transform: scale(0.99); }
+
+.login-page .btn-secondary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .login-page { flex-direction: column; }
+  .login-page .panel-brand { min-height: 280px; padding: var(--space-6); }
+  .login-page .brand-content { max-width: 100%; }
+  .login-page .tagline { font-size: var(--text-base); }
+  .login-page .panel-form { padding: var(--space-8) var(--space-6); }
+  .login-page .form-wrapper { max-width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .login-page .form-title { font-size: var(--text-2xl); }
+  .login-page .form-subtitle { font-size: var(--text-sm); }
+  .login-page .form-options { flex-direction: column; align-items: flex-start; }
+}
+
+/* ── Field-level inline validation errors ────────────────────────────
+   Shows below each input when empty or invalid on blur / submit.
+   ──────────────────────────────────────────────────────────────────── */
+
+/* Red border + bg on the input when field has an error */
+.login-page .field--error input {
+  border-color: #ef4444;
+  background: #fff8f8;
+}
+
+.login-page .field--error input:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+
+/* Error message row under input */
+.field-error {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #dc2626;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 4px;
+  animation: fieldErrIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.field-error svg {
+  flex-shrink: 0;
+  color: #ef4444;
+}
+
+@keyframes fieldErrIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

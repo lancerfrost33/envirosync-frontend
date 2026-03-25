@@ -1,0 +1,134 @@
+/* Pages overrides to align page-level styles with global design variables
+
+/* Page backgrounds */
+.categorization-page,
+.analysis-page-container,
+.material-suggestion-container,
+.dashboard,
+.upload-page,
+.landing-page,
+.user-profile-page,
+.past-suggestion-page {
+  background-color: var(--background-light) !important;
+  color: var(--text-primary);
+  font-family: var(--font-primary) !important;
+}
+
+/* Stepper */
+.progress-stepper .step-circle,
+.analysis-step-circle,
+.step-circle {
+  background-color: var(--background-gray) !important;
+  color: var(--text-secondary) !important;
+  border: 2px solid var(--border-light) !important;
+}
+
+.progress-stepper .step-item.completed .step-circle,
+.progress-stepper .step-item.active .step-circle,
+.analysis-step-circle.is-done,
+.analysis-step-circle.is-active {
+  background-color: var(--brand-teal) !important;
+  border-color: var(--brand-teal) !important;
+  color: var(--text-white) !important;
+}
+
+.progress-stepper .step-connector,
+.step-connector {
+  background-color: var(--border-light) !important;
+}
+
+.progress-stepper .step-connector.completed,
+.step-connector.completed {
+  background-color: var(--brand-teal) !important;
+}
+
+/* Buttons using brand teal */
+.btn-confirm,
+.btn-lock,
+.btn-download,
+.btn-submit,
+.btn-next,
+.btn-complete,
+.btn-complete-secondary,
+.change-btn,
+.dropdown-btn.open {
+  background-color: var(--brand-teal) !important;
+  border-color: var(--brand-teal) !important;
+  color: var(--text-white) !important;
+}
+
+.btn-confirm:hover,
+.btn-lock:hover,
+.btn-download:hover,
+.btn-submit:hover,
+.btn-next:hover,
+.change-btn:hover {
+  background-color: var(--brand-teal-hover) !important;
+  border-color: var(--brand-teal-hover) !important;
+}
+
+.dropdown-btn {
+  background-color: var(--background-white) !important;
+  border: 1px solid var(--border-light) !important;
+  color: var(--brand-teal) !important;
+}
+
+/* Logo styles */
+.logo-icon {
+  background: linear-gradient(135deg, var(--brand-teal) 0%, #2d7a71 100%) !important;
+}
+.logo-text {
+  color: var(--brand-teal) !important;
+}
+
+/* Material card highlight */
+.material-card.highlighted {
+  border-left: 5px solid var(--brand-teal) !important;
+  background-color: rgba(55, 156, 138, 0.03) !important; /* subtle tint */
+}
+
+/* Highlight bar in tables */
+.highlight-bar {
+  background-color: var(--brand-teal) !important;
+}
+
+/* Tables / cards */
+.card-wrapper,
+.material-card,
+.metric-card-metric,
+.kpi-card,
+.document-viewer-card {
+  background-color: var(--background-white) !important;
+  border: 1px solid var(--border-light) !important;
+  border-radius: var(--radius-xl) !important;
+}
+
+/* Input / select styles */
+.dropdown select,
+.search-box input,
+.toolbar-btn {
+  border: 1px solid var(--border-light) !important;
+  background-color: var(--background-white) !important;
+}
+
+/* Links and active states */
+a {
+  color: var(--brand-teal) !important;
+}
+
+a:hover {
+  color: var(--brand-teal-hover) !important;
+}
+
+/* Misc */
+.page-title, .section-title, h1, h2, h3 { 
+  color: var(--text-primary) !important;
+  font-family: var(--font-primary) !important;
+}
+
+/* Provide safe fallback for any remaining hex teals/greens */
+*[style*="#1abc9c"], *[style*="#379c8a"], *[style*="#379C8A"], *[style*="#10b981"] {
+  color: var(--brand-teal) !important;
+  background-color: var(--brand-teal) !important;
+  border-color: var(--brand-teal) !important;
+} 

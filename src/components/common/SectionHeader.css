@@ -1,0 +1,27 @@
+.section-header {
+  margin-bottom: var(--spacing-6);
+}
+
+.section-header-title {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-2);
+}
+
+.section-header-subtitle {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .section-header-title {
+    font-size: var(--text-xl);
+  }
+
+  .section-header-subtitle {
+    font-size: var(--text-sm);
+  }
+}

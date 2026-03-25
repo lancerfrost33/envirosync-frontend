@@ -1,0 +1,96 @@
+/* Save Indicator Styles */
+.save-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--text-sm);
+}
+
+.save-indicator-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+/* Text States */
+.save-indicator-text {
+  font-weight: var(--font-medium);
+  transition: color var(--transition-fast);
+}
+
+.save-indicator-text.saving {
+  color: var(--primary-blue);
+}
+
+.save-indicator-text.saved {
+  color: var(--success-green);
+}
+
+.save-indicator-text.unsaved {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Icons */
+.save-indicator-spinner {
+  color: var(--primary-blue);
+  animation: spin 1s linear infinite;
+}
+
+.save-indicator-check {
+  color: var(--success-green);
+}
+
+/* Position: Top (Header) */
+.save-indicator-top {
+  position: absolute;
+  top: var(--spacing-4);
+  right: var(--spacing-4);
+  background: var(--background-light);
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-xs);
+  z-index: 10;
+}
+
+/* Position: Inline */
+.save-indicator-inline {
+  padding: var(--spacing-2) 0;
+  border-left: 2px solid var(--border-light);
+  padding-left: var(--spacing-3);
+  margin: var(--spacing-2) 0;
+}
+
+.save-indicator-inline.saving {
+  border-left-color: var(--primary-blue);
+}
+
+.save-indicator-inline.saved {
+  border-left-color: var(--success-green);
+}
+
+/* Animations */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .save-indicator-spinner {
+    animation: none;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .save-indicator-top {
+    position: static;
+    margin-bottom: var(--spacing-3);
+  }
+}

@@ -1,0 +1,95 @@
+.page-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-light);
+}
+
+/* Allow parent to control background (for pages with patterns) */
+.page-layout.transparent-bg {
+  background-color: transparent;
+}
+
+.page-content {
+  flex: 1;
+  padding: var(--spacing-8) 0;
+  width: 100%;
+}
+
+/* Grid container dengan space di tepi - macam dalam gambar */
+.page-container {
+  max-width: 1440px; /* Max width untuk content area */
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--spacing-8); /* Space di tepi kiri dan kanan */
+  
+  /* Grid system - 12 columns */
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--spacing-6);
+}
+
+/* Page body guna full grid width */
+.page-body {
+  grid-column: 1 / -1; /* Span semua columns */
+}
+
+.page-header {
+  margin-bottom: var(--spacing-8);
+}
+
+.page-title {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.page-subtitle {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 1440px) {
+  .page-container {
+    padding: 0 var(--spacing-6);
+  }
+}
+
+@media (max-width: 1024px) {
+  .page-container {
+    padding: 0 var(--spacing-5);
+    gap: var(--spacing-4);
+  }
+}
+
+@media (max-width: 768px) {
+  .page-content {
+    padding: var(--spacing-6) 0;
+  }
+
+  .page-container {
+    padding: 0 var(--spacing-4);
+    gap: var(--spacing-3);
+  }
+
+  .page-header {
+    margin-bottom: var(--spacing-6);
+  }
+
+  .page-title {
+    font-size: var(--text-2xl);
+  }
+
+  .page-subtitle {
+    font-size: var(--text-base);
+  }
+}
+
+@media (max-width: 640px) {
+  .page-container {
+    padding: 0 var(--spacing-3);
+  }
+}

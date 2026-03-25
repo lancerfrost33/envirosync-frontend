@@ -1,0 +1,296 @@
+/* ============================================
+   ProgressStepper.css - Workflow Progress Component
+   ============================================ */
+
+.progress-stepper {
+    width: 100%;
+    padding: 2rem 0;
+    background-color: transparent;
+}
+
+.progress-stepper-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+}
+
+/* Individual Step */
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* Step Circle/Button */
+.progress-step-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #D1D5DB;
+    border: 3px solid #D1D5DB;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    cursor: default;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Current Stage - Teal/Blue */
+.progress-step--current .progress-step-circle {
+    background-color: #379C8A;
+    border-color: #379C8A;
+    box-shadow: 0 0 0 4px rgba(55, 156, 138, 0.2);
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 4px rgba(55, 156, 138, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(55, 156, 138, 0.1);
+    }
+}
+
+/* Completed Stage - Green */
+.progress-step--completed .progress-step-circle {
+    background-color: #10B981;
+    border-color: #10B981;
+}
+
+/* Disabled/Upcoming Stage - Gray */
+.progress-step--disabled .progress-step-circle {
+    background-color: #E5E7EB;
+    border-color: #E5E7EB;
+    color: #9CA3AF;
+}
+
+/* Clickable (Completed but not current) */
+.progress-step--clickable .progress-step-circle {
+    cursor: pointer;
+}
+
+.progress-step--clickable .progress-step-circle:hover {
+    background-color: #059669;
+    border-color: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+}
+
+.progress-step--clickable .progress-step-circle:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+}
+
+/* Step Label */
+.progress-step-label {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #6B7280;
+    text-align: center;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.progress-step--current .progress-step-label {
+    color: #0F172A;
+    font-weight: 700;
+}
+
+.progress-step--completed .progress-step-label {
+    color: #0F172A;
+    font-weight: 600;
+}
+
+.progress-step--disabled .progress-step-label {
+    color: #9CA3AF;
+}
+
+/* Hover effect on clickable step labels */
+.progress-step--clickable:hover .progress-step-label {
+    color: #059669;
+    font-weight: 600;
+}
+
+/* Connector Line */
+.progress-connector {
+    flex: 1;
+    min-width: 40px;
+    height: 3px;
+    background-color: #E5E7EB;
+    margin: 0 0.5rem;
+    margin-top: -28px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.progress-connector--completed {
+    background-color: #10B981;
+}
+
+/* Optional: Animated connector fill */
+.progress-connector--completed::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+    animation: fillConnector 0.5s ease-out;
+}
+
+@keyframes fillConnector {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .progress-stepper-container {
+        max-width: 100%;
+    }
+
+    .progress-step-circle {
+        width: 48px;
+        height: 48px;
+    }
+
+    .progress-step-circle svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .progress-step-label {
+        font-size: 0.75rem;
+    }
+
+    .progress-connector {
+        min-width: 40px;
+        margin-top: -24px;
+    }
+}
+
+/* Mobile - Keep horizontal but compact */
+@media (max-width: 768px) {
+    .progress-stepper {
+        padding: 1rem 0;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .progress-stepper-container {
+        flex-direction: row;
+        justify-content: space-between;
+        min-width: max-content;
+        padding: 0 0.5rem;
+    }
+
+    .progress-step {
+        flex-direction: column;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    .progress-step-circle {
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
+    }
+
+    .progress-step-circle svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .progress-step-label {
+        margin-top: 0.5rem;
+        margin-left: 0;
+        text-align: center;
+        font-size: 0.65rem;
+        white-space: nowrap;
+    }
+
+    /* Horizontal connector on mobile */
+    .progress-connector {
+        min-width: 20px;
+        height: 2px;
+        margin: 0 0.25rem;
+        margin-top: -20px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .progress-stepper {
+        padding: 0.75rem 0;
+    }
+
+    .progress-step-circle {
+        width: 36px;
+        height: 36px;
+    }
+
+    .progress-step-circle svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .progress-step-label {
+        font-size: 0.6rem;
+        margin-top: 0.4rem;
+    }
+
+    .progress-connector {
+        min-width: 12px;
+        margin-top: -18px;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .progress-step-circle {
+        border-width: 4px;
+    }
+
+    .progress-connector {
+        height: 4px;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .progress-step-circle,
+    .progress-step-label,
+    .progress-connector {
+        transition: none;
+        animation: none;
+    }
+
+    .progress-step--current .progress-step-circle {
+        animation: none;
+    }
+
+    .progress-connector--completed::after {
+        animation: none;
+    }
+}

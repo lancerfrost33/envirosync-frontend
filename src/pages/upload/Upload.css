@@ -1,0 +1,945 @@
+/* ============================================
+   Upload.css
+   ============================================ */
+
+/* --- CSS Variables --- */
+:root {
+    --color-envirosync-green: #379C8A;
+    --color-envirosync-green-dark: #2d8274;
+    --color-text-dark: #0f172a;
+    --color-text-medium: #64748b;
+    --color-text-light: #94a3b8;
+    --color-bg-light: #F8FAFC;
+    --color-bg-white: #ffffff;
+    --color-border-light: #e2e8f0;
+    --color-status-success-bg: rgba(55, 156, 138, 0.1);
+    --color-status-success-border: rgba(55, 156, 138, 0.2);
+    --color-status-success-text: #379C8A;
+    --color-file-pdf-bg: #dbeafe; /* Light blue */
+    --color-file-xlsx-bg: #d1fae5; /* Light green */
+    --color-file-icon-pdf: #2563EB; /* Blue for PDF icon */
+    --color-file-icon-xlsx: #16A34A; /* Green for XLSX icon */
+    --color-trash-icon: #94A3B8; /* Grey for trash icon */
+
+    /* Spacing */
+    --spacing-2: 0.5rem;   /* 8px */
+    --spacing-3: 0.75rem;  /* 12px */
+    --spacing-4: 1rem;     /* 16px */
+    --spacing-5: 1.25rem;  /* 20px */
+    --spacing-6: 1.5rem;   /* 24px */
+    --spacing-8: 2rem;     /* 32px */
+    --spacing-10: 2.5rem;  /* 40px */
+    --spacing-12: 3rem;    /* 48px */
+    --spacing-15: 3.75rem; /* 60px */
+
+    /* Font Sizes */
+    --text-xs: 0.75rem;    /* 12px */
+    --text-sm: 0.875rem;   /* 14px */
+    --text-base: 1rem;     /* 16px */
+    --text-lg: 1.125rem;   /* 18px */
+    --text-xl: 1.25rem;    /* 20px */
+    --text-2xl: 1.5rem;    /* 24px */
+
+    /* Border Radius */
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-full: 9999px;
+
+    /* Transitions */
+    --transition-base: 0.3s ease-in-out;
+}
+
+.qto-upload-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-bg-light);
+    font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.qto-upload-main {
+    flex: 1;
+    padding: var(--spacing-10) 0 0; /* Reduced top padding to 40px */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.qto-upload-container {
+    width: 100%; /* Allow to fill max-width */
+    max-width: 1440px; /* Match Header max-width */
+    margin: 0 auto;
+    padding: 0 var(--spacing-8); /* 32px left/right padding to match Header */
+}
+
+/* Heading */
+.qto-heading {
+    font-family: Inter, sans-serif;
+    font-weight: 700;
+    font-size: var(--text-2xl); /* 24px */
+    line-height: 1.5em;
+    color: var(--color-text-dark);
+    margin: 0 0 var(--spacing-3); /* 12px bottom margin */
+}
+
+/* Description */
+.qto-description {
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    font-size: var(--text-base); /* 16px */
+    line-height: 1.6em;
+    color: var(--color-text-medium);
+    margin: 0 0 var(--spacing-10); /* 40px bottom margin */
+}
+
+/* Dropzone */
+.qto-dropzone {
+    margin-top: 0; /* Removed margin-top, spacing handled by description */
+    width: 100%; /* Fill container width */
+    height: 284px;
+    background: rgba(55, 156, 138, 0.05);
+    border: 2px dashed rgba(55, 156, 138, 0.4);
+    border-radius: 0.8rem; /* Increase to 12px */
+    padding: var(--spacing-4) var(--spacing-6); /* 16px 24px */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.qto-dropzone--drag-over {
+    background: rgba(55, 156, 138, 0.1);
+    border-color: rgba(55, 156, 138, 0.6);
+}
+
+.qto-upload-icon {
+    width: 66px;
+    height: 62px;
+    margin-bottom: var(--spacing-4); /* 16px */
+    color: var(--color-envirosync-green); /* Apply green color to lucide icon */
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.05));
+}
+
+.qto-dropzone-title {
+    font-family: Inter, sans-serif;
+    font-weight: 600;
+    font-size: var(--text-xl); /* 20px */
+    line-height: 1.4em;
+    color: var(--color-text-dark);
+    margin: var(--spacing-4) 0 0; /* 16px top margin */
+}
+
+.qto-dropzone-text {
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    font-size: var(--text-sm); /* 14px */
+    line-height: 1.4285714285714286em;
+    color: var(--color-text-medium);
+    margin: var(--spacing-4) 0 0; /* 16px top margin */
+}
+
+.qto-browse-btn {
+    margin-top: var(--spacing-4); /* 16px top margin */
+    width: 163.8px; /* Fixed width */
+    height: 50px;
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md); /* 8px */
+    font-family: Inter, sans-serif;
+    font-weight: 600;
+    font-size: var(--text-base); /* 16px */
+    line-height: 1.5em;
+    color: #334155;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.qto-browse-btn:hover {
+    background: var(--color-bg-light);
+    border-color: #cbd5e1;
+}
+
+.qto-error-text {
+    margin-top: var(--spacing-3); /* 12px */
+    font-size: var(--text-sm); /* 14px */
+    color: #dc2626;
+    font-weight: 400;
+}
+
+/* Table Card */
+.qto-table-card {
+    margin-top: var(--spacing-10); /* 40px top margin */
+    width: 100%; /* Fill container width */
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: 0.75rem; /* Match Categorization page: 12px */
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.qto-table-header {
+    height: 57px;
+    background: rgba(248, 250, 252, 0.5);
+    border-bottom: 1px solid var(--color-border-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--spacing-6); /* 24px */
+}
+
+.qto-table-title {
+    font-family: Inter, sans-serif;
+    font-weight: 600;
+    font-size: var(--text-base); /* 16px */
+    line-height: 1.5em;
+    color: #1e293b;
+    margin: 0;
+}
+
+.qto-table-header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4); /* 16px */
+}
+
+.qto-file-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    min-width: 29.27px;
+    padding: 0 var(--spacing-2); /* 8px */
+    border-radius: var(--radius-full);
+    background: #e2e8f0; /* Light grey background */
+    font-family: Inter, sans-serif;
+    font-size: var(--text-xs); /* 12px */
+    font-weight: 700;
+    line-height: 1.3333333333333333em;
+    color: #475569; /* Darker grey text */
+}
+
+.qto-clear-btn {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    font-family: Inter, sans-serif;
+    font-size: var(--text-sm); /* 14px */
+    font-weight: 600;
+    line-height: 1.4285714285714286em;
+    color: var(--color-envirosync-green); /* Green text */
+    transition: opacity 0.2s ease;
+}
+
+.qto-clear-btn:hover:not(:disabled) {
+    opacity: 0.8;
+}
+
+.qto-clear-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Table */
+.qto-table-wrapper {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 266px; /* Approximately 3 rows (72.5px each) + header (48px) */
+}
+
+/* Custom scrollbar styling */
+.qto-table-wrapper::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.qto-table-wrapper::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+}
+
+.qto-table-wrapper::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+.qto-table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+.qto-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.qto-table thead {
+    position: sticky;
+    top: 0;
+    background: var(--color-bg-white);
+    z-index: 1;
+}
+
+.qto-table thead tr {
+    background: rgba(248, 250, 252, 0.5);
+}
+
+.qto-table-header-cell {
+    padding: var(--spacing-4) var(--spacing-6); /* 16px 24px */
+    font-family: Inter, sans-serif;
+    font-weight: 700;
+    font-size: var(--text-xs); /* 12px */
+    line-height: 1.3333333333333333em;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+    text-align: left;
+    white-space: nowrap;
+}
+
+.qto-table-header-cell--action {
+    text-align: center;
+    vertical-align: middle;
+    padding-right: 0;
+}
+
+.qto-table-row {
+    border-top: 1px solid #f1f5f9;
+}
+
+.qto-table-row:first-child {
+    border-top: none;
+}
+
+.qto-table-cell {
+    padding: var(--spacing-4) var(--spacing-6); /* 16px 24px */
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: var(--text-sm); /* 14px */
+    line-height: 1.4285714285714286em;
+    color: var(--color-text-dark);
+}
+
+.qto-table-cell--muted {
+    color: var(--color-text-medium);
+}
+
+.qto-table-cell--action {
+    text-align: center;
+    vertical-align: middle;
+    padding-right: 0;
+}
+
+.qto-table-empty {
+    padding: var(--spacing-12) var(--spacing-6); /* 48px 24px */
+    text-align: center;
+    color: var(--color-text-light);
+    font-size: var(--text-sm); /* 14px */
+}
+
+/* File Info */
+.qto-file-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3); /* 12px */
+}
+
+.qto-file-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md); /* 8px */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.qto-file-icon--pdf {
+    background: var(--color-file-pdf-bg);
+}
+
+.qto-file-icon--xlsx {
+    background: var(--color-file-xlsx-bg);
+}
+
+/* File icon SVG colors */
+.qto-file-icon--pdf svg path:first-child { fill: var(--color-file-icon-pdf); }
+.qto-file-icon--pdf svg path:nth-child(2) { fill: #1D4ED8; } /* Darker blue for shadow */
+.qto-file-icon--xlsx svg path:first-child { fill: var(--color-file-icon-xlsx); }
+.qto-file-icon--xlsx svg path:nth-child(2) { fill: #15803D; } /* Darker green for shadow */
+
+
+.qto-file-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.qto-file-name {
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: var(--text-sm); /* 14px */
+    line-height: 1.4285714285714286em;
+    color: var(--color-text-dark);
+}
+
+.qto-file-date {
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    font-size: var(--text-xs); /* 12px */
+    line-height: 1.3333333333333333em;
+    color: var(--color-text-light);
+}
+
+/* Status Badge */
+.qto-status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 26px;
+    padding: 0 var(--spacing-3); /* 12px */
+    border-radius: var(--radius-full);
+    background: var(--color-status-success-bg);
+    border: 1px solid var(--color-status-success-border);
+    font-family: Inter, sans-serif;
+    font-size: var(--text-xs); /* 12px */
+    font-weight: 600;
+    line-height: 1.3333333333333333em;
+    color: var(--color-status-success-text);
+}
+
+.qto-status-badge--processing {
+    background: #DBEAFE;
+    border-color: #93C5FD;
+    color: #1E40AF;
+}
+
+.qto-status-badge--completed {
+    background: #D1FAE5;
+    border-color: #6EE7B7;
+    color: #065F46;
+}
+
+.qto-status-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Action Buttons Container */
+.qto-action-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Action Button */
+.qto-action-btn {
+    width: 28px;
+    height: 36px;
+    border: 0;
+    background: transparent;
+    border-radius: var(--radius-md); /* 8px */
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+    color: var(--color-trash-icon); /* Apply color to lucide icon */
+}
+
+.qto-action-btn:hover:not(:disabled) {
+    background: var(--color-bg-light);
+}
+
+.qto-action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Process Button (Individual) */
+.qto-process-btn {
+    width: 28px;
+    height: 36px;
+    border: 0;
+    background: transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+    color: var(--color-envirosync-green);
+}
+
+.qto-process-btn:hover {
+    background: var(--color-status-success-bg);
+}
+
+/* Process All Button */
+.qto-process-all-btn {
+    height: 32px;
+    padding: 0 var(--spacing-4);
+    background: var(--color-envirosync-green);
+    border: 0;
+    border-radius: var(--radius-md);
+    font-family: Inter, sans-serif;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.qto-process-all-btn:hover:not(:disabled) {
+    background: var(--color-envirosync-green-dark);
+}
+
+.qto-process-all-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.qto-btn-spinner {
+    animation: spin 1s linear infinite;
+}
+
+/* Queue Summary Stats */
+.qto-queue-summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: 16px;
+    font-size: var(--text-xs);
+    font-weight: 500;
+}
+
+.qto-queue-stat {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: var(--text-xs);
+    font-weight: 600;
+}
+
+.qto-queue-stat--ready {
+    background: #FEF3C7;
+    color: #92400E;
+}
+
+.qto-queue-stat--processing {
+    background: #DBEAFE;
+    color: #1E40AF;
+}
+
+.qto-queue-stat--completed {
+    background: #D1FAE5;
+    color: #065F46;
+}
+
+/* Confirmation Bar */
+.qto-confirmation-bar {
+    margin-top: var(--spacing-8); /* 32px top margin */
+    margin-bottom: var(--spacing-15); /* 60px bottom margin */
+    width: 100%; /* Fill container width */
+    height: 80px; /* Increased height */
+    background: var(--color-bg-white);
+    border-top: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md); /* 8px */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--spacing-8); /* 32px padding */
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+}
+
+.qto-auto-save-text {
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: var(--text-base); /* 16px */
+    line-height: 1.5em;
+    color: var(--color-text-medium);
+    margin: 0;
+}
+
+.qto-confirmation-buttons {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4); /* 16px */
+}
+
+.qto-save-draft-btn {
+    /* Adjusted to match screenshot's "Save Draft" button */
+    height: 44px; /* Increased height */
+    padding: 0 var(--spacing-6); /* 24px horizontal padding */
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-border-light); /* Lighter border */
+    border-radius: var(--radius-md); /* 8px */
+    font-family: Inter, sans-serif;
+    font-weight: 600;
+    font-size: var(--text-base); /* 16px */
+    line-height: 1.5em; /* Adjusted line-height */
+    color: var(--color-text-medium); /* Grey text */
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.qto-save-draft-btn:hover {
+    background: var(--color-bg-light);
+    border-color: #cbd5e1;
+    color: #475569;
+}
+
+.qto-continue-btn {
+    height: 44px; /* Increased height */
+    padding: 0 var(--spacing-6); /* 24px horizontal padding */
+    background: var(--color-envirosync-green);
+    border: 0;
+    border-radius: var(--radius-md); /* 8px */
+    font-family: Inter, sans-serif;
+    font-weight: 600;
+    font-size: var(--text-base); /* 16px */
+    line-height: 1.5em; /* Adjusted line-height */
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-3); /* 12px gap for icon */
+    box-shadow: 0px 4px 6px -4px rgba(55, 156, 138, 0.2),
+        0px 10px 15px -3px rgba(55, 156, 138, 0.2);
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.qto-continue-btn:hover:not(:disabled) {
+    background: var(--color-envirosync-green-dark);
+}
+
+.qto-continue-btn:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.qto-continue-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none; /* Remove shadow when disabled */
+}
+
+.qto-chevron-icon {
+    width: 18px;
+    height: 18px; /* Adjusted height for lucide icon */
+    display: block;
+}
+
+/* Footer - matches Dashboard footer */
+/* Assuming Footer component has its own CSS or is styled globally */
+/* If not, you might need to define .dashboard-footer, .footer-ellipses, etc. here */
+/* For now, I'll keep the existing footer styles you provided */
+.dashboard-footer {
+    background-color: var(--color-bg-white);
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 0 var(--spacing-6); /* 24px */
+    border-top: 1px solid var(--color-border-light); /* Added border-top */
+}
+
+.footer-ellipses {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.footer-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+}
+
+.footer-dot-green {
+    background-color: #379c8a;
+}
+
+.footer-dot-accent {
+    background-color: #2d8274;
+}
+
+.footer-text {
+    font-weight: 400;
+    font-size: var(--text-sm); /* 14px */
+    line-height: 1.2102272033691406em;
+    color: #000000;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .qto-upload-container {
+        max-width: 100%; /* Allow to fill width up to padding */
+        padding: 0 var(--spacing-6); /* 24px padding on sides */
+    }
+
+    .qto-dropzone {
+        width: 100%;
+    }
+
+    .qto-table-card {
+        width: 100%;
+    }
+
+    .qto-confirmation-bar {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .qto-heading {
+        margin-top: var(--spacing-8); /* 32px */
+        font-size: var(--text-xl); /* 20px */
+    }
+
+    .qto-description {
+        font-size: var(--text-sm); /* 14px */
+    }
+
+    .qto-dropzone {
+        height: 200px; /* Smaller height on mobile */
+        padding: var(--spacing-4);
+    }
+
+    .qto-upload-icon {
+        width: 48px;
+        height: 48px;
+        margin-bottom: var(--spacing-3);
+    }
+
+    .qto-dropzone-title {
+        font-size: var(--text-lg); /* 18px */
+    }
+
+    .qto-dropzone-text {
+        font-size: var(--text-sm); /* 14px */
+    }
+
+    .qto-browse-btn {
+        height: 40px;
+        font-size: var(--text-sm);
+    }
+
+    .qto-table-card {
+        margin-top: var(--spacing-8); /* 32px */
+    }
+
+    .qto-table-header {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: var(--spacing-4) var(--spacing-6); /* 16px 24px */
+        gap: var(--spacing-3); /* 12px */
+    }
+
+    .qto-table-title {
+        font-size: var(--text-sm); /* 14px */
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .qto-queue-summary {
+        margin-left: 0;
+        margin-top: 8px;
+        flex-wrap: wrap;
+    }
+
+    .qto-table-header-right {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .qto-process-all-btn {
+        font-size: var(--text-xs);
+        height: 28px;
+        padding: 0 12px;
+    }
+
+    .qto-file-count {
+        height: 18px;
+        font-size: var(--text-xs);
+    }
+
+    .qto-clear-btn {
+        font-size: var(--text-sm);
+    }
+
+    .qto-table-header-cell {
+        padding: var(--spacing-3) var(--spacing-4); /* 12px 16px */
+        font-size: var(--text-xs);
+    }
+
+    .qto-table-cell {
+        padding: var(--spacing-3) var(--spacing-4); /* 12px 16px */
+        font-size: var(--text-sm);
+    }
+
+    .qto-file-info {
+        gap: var(--spacing-2);
+    }
+
+    .qto-file-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .qto-file-name {
+        font-size: var(--text-sm);
+    }
+
+    .qto-file-date {
+        font-size: var(--text-xs);
+    }
+
+    .qto-status-badge {
+        height: 22px;
+        font-size: var(--text-xs);
+    }
+
+    .qto-action-buttons {
+        gap: 4px;
+    }
+
+    .qto-action-btn {
+        width: 24px;
+        height: 30px;
+    }
+    .qto-action-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .qto-process-btn {
+        width: 24px;
+        height: 30px;
+    }
+    .qto-process-btn svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .qto-confirmation-bar {
+        margin-top: var(--spacing-8); /* 32px */
+        margin-bottom: var(--spacing-10); /* 40px */
+        height: auto;
+        padding: var(--spacing-4) var(--spacing-6); /* 16px 24px */
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-3); /* 12px */
+    }
+
+    .qto-auto-save-text {
+        font-size: var(--text-sm);
+    }
+
+    .qto-confirmation-buttons {
+        width: 100%;
+        flex-direction: column;
+        gap: var(--spacing-3);
+    }
+
+    .qto-save-draft-btn,
+    .qto-continue-btn {
+        width: 100%;
+        height: 40px;
+        font-size: var(--text-sm);
+    }
+}
+
+@media (max-width: 480px) {
+    .qto-upload-container {
+        padding: 0 var(--spacing-4); /* 16px padding on sides */
+    }
+
+    .qto-heading {
+        font-size: var(--text-xl); /* 20px */
+    }
+
+    .qto-description {
+        font-size: var(--text-sm); /* 14px */
+    }
+
+    .qto-dropzone {
+        height: 180px;
+    }
+
+    .qto-dropzone-title {
+        font-size: var(--text-base); /* 16px */
+    }
+
+    .qto-dropzone-text {
+        font-size: var(--text-xs); /* 12px */
+    }
+
+    .qto-browse-btn {
+        height: 36px;
+        font-size: var(--text-sm);
+    }
+
+    .qto-table-header {
+        padding: var(--spacing-3) var(--spacing-4); /* 12px 16px */
+    }
+
+    .qto-table-header-right {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-2);
+    }
+
+    .qto-process-all-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .qto-file-count {
+        align-self: flex-start;
+    }
+
+    .qto-clear-btn {
+        width: 100%;
+    }
+
+    .qto-table-header-cell {
+        padding: var(--spacing-2) var(--spacing-3); /* 8px 12px */
+    }
+
+    .qto-table-cell {
+        padding: var(--spacing-2) var(--spacing-3); /* 8px 12px */
+    }
+
+    .qto-confirmation-bar {
+        padding: var(--spacing-3) var(--spacing-4); /* 12px 16px */
+    }
+}

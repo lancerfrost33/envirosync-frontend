@@ -1,0 +1,446 @@
+/* Batch Process Modal Styles */
+
+.batch-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  animation: fadeInOverlay 0.3s ease-out;
+}
+
+.batch-modal-container {
+  background: var(--background-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Header */
+.batch-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-6);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.batch-modal-title {
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.batch-modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.batch-modal-close:hover {
+  color: var(--text-primary);
+}
+
+/* Progress Section */
+.batch-modal-progress {
+  padding: var(--spacing-4) var(--spacing-6);
+  background: var(--background-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-3);
+}
+
+.progress-text {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.progress-percentage {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 6px;
+  background: var(--border-light);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-green), var(--success-green));
+  transition: width 0.3s ease;
+}
+
+/* Content Section */
+.batch-modal-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-4);
+}
+
+.files-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  background: var(--background-light);
+  transition: all var(--transition-fast);
+}
+
+.file-item-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex: 1;
+}
+
+.file-name {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  font-weight: var(--font-medium);
+  word-break: break-word;
+}
+
+.file-status {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  font-weight: var(--font-medium);
+  white-space: nowrap;
+  margin-left: var(--spacing-3);
+}
+
+/* File Status Variants */
+.file-item--pending {
+  border-color: var(--border-light);
+  background: var(--background-light);
+}
+
+.file-item--processing {
+  border-color: var(--primary-blue);
+  background: rgba(74, 144, 226, 0.05);
+}
+
+.file-item--completed {
+  border-color: var(--success-green);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.file-item--failed {
+  border-color: var(--error-red);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.status-icon {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+}
+
+.status-icon.pending {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+}
+
+.status-icon.processing {
+  color: var(--primary-blue);
+  animation: spin 1s linear infinite;
+}
+
+.status-icon.success {
+  color: var(--success-green);
+}
+
+.status-icon.error {
+  color: var(--error-red);
+}
+
+/* Results Section */
+.batch-modal-results {
+  padding: var(--spacing-4);
+  border-top: 1px solid var(--border-light);
+  background: var(--background-light);
+}
+
+.results-summary {
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4);
+  border: 2px solid var(--border-light);
+  animation: slideUp 0.3s ease-out;
+}
+
+.results-summary.success {
+  background: rgba(16, 185, 129, 0.05);
+  border-color: var(--success-green);
+}
+
+.results-summary.partial {
+  background: rgba(251, 191, 36, 0.05);
+  border-color: var(--warning-yellow);
+}
+
+.results-title {
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-4) 0;
+}
+
+.results-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-4);
+}
+
+.stat {
+  text-align: center;
+  padding: var(--spacing-3);
+  border-radius: var(--radius-lg);
+  background: var(--background-white);
+}
+
+.stat-label {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-1);
+}
+
+.stat-value {
+  display: block;
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+}
+
+.stat-value.success {
+  color: var(--success-green);
+}
+
+.stat-value.error {
+  color: var(--error-red);
+}
+
+/* Failed Projects Section */
+.failed-projects {
+  margin-top: var(--spacing-4);
+  padding-top: var(--spacing-4);
+  border-top: 1px solid var(--border-light);
+}
+
+.failed-title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--error-red);
+  margin: 0 0 var(--spacing-3) 0;
+}
+
+.failed-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.failed-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-lg);
+  background: var(--background-white);
+  border: 1px solid var(--border-light);
+}
+
+.failed-icon {
+  flex-shrink: 0;
+  color: var(--error-red);
+  margin-top: 2px;
+}
+
+.failed-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.failed-name {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+.failed-error {
+  font-size: var(--text-xs);
+  color: var(--error-red);
+  margin-top: 2px;
+}
+
+/* Footer */
+.batch-modal-footer {
+  padding: var(--spacing-4) var(--spacing-6);
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  gap: var(--spacing-3);
+  justify-content: flex-end;
+}
+
+.btn {
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-lg);
+  border: none;
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.btn-primary {
+  background: var(--primary-green);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--primary-green-dark);
+}
+
+.btn-cancel {
+  background: var(--background-light);
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+}
+
+.btn-cancel:hover {
+  background: var(--border-light);
+}
+
+/* Animations */
+@keyframes fadeInOverlay {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .batch-modal-container {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .batch-modal-header {
+    padding: var(--spacing-4);
+  }
+
+  .results-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .batch-modal-footer {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .batch-modal-overlay,
+  .batch-modal-container,
+  .results-summary,
+  .status-icon.processing,
+  .progress-bar-fill {
+    animation: none;
+  }
+}
+
+/* Scrollbar Styling */
+.batch-modal-content {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-light) var(--background-light);
+}
+
+.batch-modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.batch-modal-content::-webkit-scrollbar-track {
+  background: var(--background-light);
+}
+
+.batch-modal-content::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: 3px;
+}
+
+.batch-modal-content::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
